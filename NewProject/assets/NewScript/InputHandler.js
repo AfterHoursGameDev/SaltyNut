@@ -8,6 +8,7 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
+
 cc.Class({
     extends: cc.Component,
 
@@ -32,6 +33,10 @@ cc.Class({
         },
         eventFired:{
             default : false
+        },
+        gameHandler :{
+            default : null,
+            type : cc.Node
         }
     },
 
@@ -50,9 +55,15 @@ cc.Class({
                 var dy = event.getDelta().y;
                 if(dy > 15){
                     console.log("Up swipe detected");
+                    this.node.emit("inputevent",{
+                        msg: "swipeup"
+                    });
                     this.eventFired = !this.eventFired;
                 }else if(dy < -15){
                     console.log("down swipe detected");
+                    this.node.emit("inputevent", {
+                        msg: "swipedown"
+                    });
                     this.eventFired = !this.eventFired;
                 }
 ;            }
@@ -61,16 +72,18 @@ cc.Class({
         this.node.on(cc.Node.EventType.MOUSE_UP, function(event){
             this.touching = !this.touching;
             console.log("Mouse up!")
-            if(this.eventFired){
+            if(this.eventFired)
+            {
                 this.eventFired = !this.eventFired;
             }
-            else{
+            else
+            {
                 console.log("no swipe, but touch event detected");
+                this.node.emit("inputevent", {
+                    msg : "tap"
+                });
+                this.gameHandler.getComponent("GameHandler").AdvanceToNextCommand();
             }
-        },this);
-
-        this.node.on(cc.Node.EventType.MOUSE_WHEEL,function(event){
-            console.log("MOUSE WHEEL");
         },this);
 
         cc.systemEvent.setAccelerometerEnabled(true);
@@ -78,7 +91,7 @@ cc.Class({
     },
 
     onDeviceMotionEvent : function(event){
-        console.log("X ACCEL : " + event.acc.x + " , Y ACCEL : " + event.acc.y);
+        //console.log("X ACCEL : " + event.acc.x + " , Y ACCEL : " + event.acc.y);
     },
 
     start () {
