@@ -59,14 +59,16 @@ cc.Class({
                         msg: "swipeup"
                     });
                     this.eventFired = !this.eventFired;
+                    
                 }else if(dy < -15){
                     console.log("down swipe detected");
                     this.node.emit("inputevent", {
                         msg: "swipedown"
                     });
                     this.eventFired = !this.eventFired;
+                    this.gameHandler.getComponent("GameHandler").SubmitCommand("CRUSHIT");
                 }
-;            }
+            }
         }, this);
 
         this.node.on(cc.Node.EventType.MOUSE_UP, function(event){
@@ -74,6 +76,7 @@ cc.Class({
             console.log("Mouse up!")
             if(this.eventFired)
             {
+                this.gameHandler.getComponent("GameHandler").SubmitCommand("POPIT");
                 this.eventFired = !this.eventFired;
             }
             else
@@ -82,7 +85,7 @@ cc.Class({
                 this.node.emit("inputevent", {
                     msg : "tap"
                 });
-                this.gameHandler.getComponent("GameHandler").AdvanceToNextCommand();
+                this.gameHandler.getComponent("GameHandler").SubmitCommand("GUNIT");
             }
         },this);
 
@@ -92,6 +95,9 @@ cc.Class({
 
     onDeviceMotionEvent : function(event){
         //console.log("X ACCEL : " + event.acc.x + " , Y ACCEL : " + event.acc.y);
+
+        // Need to define the behavior for this
+
     },
 
     start () {

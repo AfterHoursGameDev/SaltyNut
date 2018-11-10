@@ -39,7 +39,7 @@ cc.Class({
             default:0
         },
         threshold : {
-            default : 2
+            default : 5
         },
         command : {
             default: []
@@ -53,10 +53,30 @@ cc.Class({
         score :{
             default : 0
         },
-        
+        sceneManager :{
+            default : null,
+            type : cc.Node
+        },
+        sceneTimer:{
+            default : null,
+            type : cc.Label
+        },
+        commandLabel:{
+            default : null,
+            type: cc.Label
+        }
     },
 
     // Game Loop controllers
+
+    SubmitCommand(sentCommand){
+        if(sendCommand === currentCommand){
+            AdvanceToNextCommand();
+        }
+        else{
+            EndGame();
+        }
+    },
 
     GetNextCommand () 
     {
@@ -67,56 +87,37 @@ cc.Class({
 
     AdvanceToNextCommand(){
         this.currentCommand = this.GetNextCommand();
-        this.timer = 0;
+        this.timer = this.threshold;
         console.log("EVENT FIRED");
-        this.node.emit("advancecommandevent",{
-            msg: "advance",
-            score : this.score
-        });
     },
 
     EndGame(){
-        this.node.emit("endgameevent",{
-            msg : "MESSAGE" 
-        })
+        this.sceneManager.getComponent("SceneHandler").LoadScene("EndScene");
     },
    
     // LIFE-CYCLE CALLBACKS:
 
-    
-
     onLoad () 
     {        
         this.command = ["POPIT","GUNIT","SHAKEIT","CRUSHIT"];
-        console.log(this.command);
-        this.node.on("inputevent",function(event){
-            console.log("Event recieved!");
-            
-            if(this.currentCommand === event.detail.msg){
-                //advance to the next state
-                this.AdvanceToNextCommand();
-            }
-            else{
-                //advance to the fail state
-                this.EndGame();
-            }
-        }, this);
-        
-
+        this.sceneManager = cc.find("SceneHandler");
+        this.timer = this.threshold;
     },
 
     start () 
     {
-        console.log(this.GetNextCommand());
+        this.currentCommand = this.AdvanceToNextCommand();
+
     },
 
     update (dt) 
     {
-        //this.timer = this.timer + dt;
-        //if(this.timer > this.threshold){
+        this.timer = this.timer - dt;
+        this.sceneTimer.string = this.timer.toString().split(".")[0];
+        if(this.timer < 0){
             //End game transition
-         //   this.EndGame();
-          //  this.timer = 0;
-       // }
+            this.EndGame();
+            this.timer = 0;
+        }
     },
 });

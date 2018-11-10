@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "38905d41-343a-451f-92c8-832d425530c0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": true,
+  "subMetas": {
+    "AniHands_icons": {
+      "ver": "1.0.3",
+      "uuid": "240e76b9-d631-4aa8-8938-88cd5364f24d",
+      "rawTextureUuid": "38905d41-343a-451f-92c8-832d425530c0",
+      "trimType": "custom",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -20.5,
+      "offsetY": 107,
+      "trimX": 4,
+      "trimY": 24,
+      "width": 751,
+      "height": 1018,
+      "rawWidth": 800,
+      "rawHeight": 1280,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
