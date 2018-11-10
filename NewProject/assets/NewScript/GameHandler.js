@@ -67,9 +67,8 @@ cc.Class({
         }
     },
 
-    // Game Loop controllers
 
-
+    // Get the next command in the order (there currently is no object end to the experience)
     GetNextCommand () 
     {
         let rand = Math.floor((Math.random() * this.command.length - 1) + 1 );
@@ -77,6 +76,7 @@ cc.Class({
         return this.command[rand];
     },
 
+    // advance to the next command
     AdvanceToNextCommand(){
         this.currentCommand = this.GetNextCommand();
         this.commandLabel.string = this.currentCommand;
@@ -84,11 +84,13 @@ cc.Class({
         this.timer = this.threshold;
     },
 
+    // ends the game, triggers the transition to "EndScene"
     EndGame(){
         this.sceneManager.getComponent("SceneHandler").LoadScene("EndScene");
     },
 
-    
+    //The input event calls this, this then handles the logic to see if the input
+    // is correct or not
     SubmitCommand(sentCommand){
         console.log("current command " + this.currentCommand);
         if(this.currentCommand == undefined){

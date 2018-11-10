@@ -37,6 +37,9 @@ cc.Class({
         gameHandler :{
             default : null,
             type : cc.Node
+        },
+        up :{
+            default : false
         }
     },
 
@@ -53,21 +56,21 @@ cc.Class({
             if(this.touching){
                 //console.log("DeltaX : " + event.getDelta().x + "DeltaY : " + event.getDelta().y );
                 var dy = event.getDelta().y;
-                if(dy > 15){
+                if(dy > 30){
                     console.log("Up swipe detected");
                     this.node.emit("inputevent",{
                         msg: "swipeup"
                     });
                     this.eventFired = !this.eventFired;
-                    this.gameHandler.getComponent("GameHandler").SubmitCommand("POPIT");
+                    this.up = true;
                 }
-                else if(dy < -15){
+                else if(dy < -30){
                     console.log("down swipe detected");
                     this.node.emit("inputevent", {
                         msg: "swipedown"
                     });
                     this.eventFired = !this.eventFired;
-                    this.gameHandler.getComponent("GameHandler").SubmitCommand("CRUSHIT");
+                    this.up = false;
                 }
             }
         }, this);
@@ -78,6 +81,12 @@ cc.Class({
             if(this.eventFired)
             {
                 this.eventFired = !this.eventFired;
+                if(this.up){
+                    this.gameHandler.getComponent("GameHandler").SubmitCommand("POPIT");
+                }
+                else if(!this.up){
+                    this.gameHandler.getComponent("GameHandler").SubmitCommand("CRUSHIT");
+                }
             }
             else
             {
