@@ -30,7 +30,7 @@ cc.Class({
         score: {
             default : 0
         },
-        
+
     },
 
     // Custom Methods
@@ -45,7 +45,26 @@ cc.Class({
 
     LoadScene(sceneToBeLoaded){
         cc.director.loadScene(sceneToBeLoaded);
+    },
+
+    LoadGameScene(){
+        cc.director.loadScene("GameScene");
+    },
+
+    LoadMenuScene(){
+        cc.director.loadScene("IntroScene");
+    },
+
+    LoadEndScene(){
+        cc.director.loadScene("EndScene");
+    },
+
+    ShareToFacebook(){
+        //This will handle all of the generic facebook shenanigans
+        console.log("This is where facebook stuff would be");
     }
+
+    
 
     // update (dt) {},
 });

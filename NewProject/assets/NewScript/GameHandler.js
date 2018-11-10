@@ -79,9 +79,7 @@ cc.Class({
 
     AdvanceToNextCommand(){
         this.currentCommand = this.GetNextCommand();
-        let tempString = this.currentCommand;
         this.commandLabel.string = this.currentCommand;
-        this.currentCommand = tempString;
         console.log("Advance to this command : " + this.currentCommand);
         this.timer = this.threshold;
     },
@@ -98,7 +96,7 @@ cc.Class({
         }
         console.log(sentCommand);
         if(sentCommand == this.currentCommand){
-            AdvanceToNextCommand();
+            this.AdvanceToNextCommand();
         }
         else{
             this.EndGame();
@@ -116,8 +114,7 @@ cc.Class({
 
     start () 
     {
-        this.currentCommand = this.AdvanceToNextCommand();
-
+        this.AdvanceToNextCommand();
     },
 
     update (dt) 
