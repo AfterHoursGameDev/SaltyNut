@@ -69,14 +69,6 @@ cc.Class({
 
     // Game Loop controllers
 
-    SubmitCommand(sentCommand){
-        if(sendCommand === currentCommand){
-            AdvanceToNextCommand();
-        }
-        else{
-            EndGame();
-        }
-    },
 
     GetNextCommand () 
     {
@@ -87,12 +79,30 @@ cc.Class({
 
     AdvanceToNextCommand(){
         this.currentCommand = this.GetNextCommand();
+        let tempString = this.currentCommand;
+        this.commandLabel.string = this.currentCommand;
+        this.currentCommand = tempString;
+        console.log("Advance to this command : " + this.currentCommand);
         this.timer = this.threshold;
-        console.log("EVENT FIRED");
     },
 
     EndGame(){
         this.sceneManager.getComponent("SceneHandler").LoadScene("EndScene");
+    },
+
+    
+    SubmitCommand(sentCommand){
+        console.log("current command " + this.currentCommand);
+        if(this.currentCommand == undefined){
+            console.log("CurrentCommand is undefined for some reason?");
+        }
+        console.log(sentCommand);
+        if(sentCommand == this.currentCommand){
+            AdvanceToNextCommand();
+        }
+        else{
+            this.EndGame();
+        }
     },
    
     // LIFE-CYCLE CALLBACKS:

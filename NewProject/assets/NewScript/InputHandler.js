@@ -59,8 +59,9 @@ cc.Class({
                         msg: "swipeup"
                     });
                     this.eventFired = !this.eventFired;
-                    
-                }else if(dy < -15){
+                    this.gameHandler.getComponent("GameHandler").SubmitCommand("POPIT");
+                }
+                else if(dy < -15){
                     console.log("down swipe detected");
                     this.node.emit("inputevent", {
                         msg: "swipedown"
@@ -76,7 +77,6 @@ cc.Class({
             console.log("Mouse up!")
             if(this.eventFired)
             {
-                this.gameHandler.getComponent("GameHandler").SubmitCommand("POPIT");
                 this.eventFired = !this.eventFired;
             }
             else
