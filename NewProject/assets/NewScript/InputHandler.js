@@ -52,9 +52,7 @@ cc.Class({
         },this);
 
         this.node.on(cc.Node.EventType.MOUSE_MOVE,function(event){
-            //console.log("Mouse moving!");
             if(this.touching){
-                //console.log("DeltaX : " + event.getDelta().x + "DeltaY : " + event.getDelta().y );
                 var dy = event.getDelta().y;
                 if(dy > 30){
                     console.log("Up swipe detected");
