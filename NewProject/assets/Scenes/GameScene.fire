@@ -53,8 +53,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.4265625,
-      "y": 0.4265625,
+      "x": 0.2210214125500357,
+      "y": 0.2210214125500357,
       "z": 1
     },
     "_quat": {
@@ -102,8 +102,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 640,
+      "height": 960
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -112,8 +112,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 480,
-      "y": 320,
+      "x": 320,
+      "y": 480,
       "z": 0
     },
     "_scale": {
@@ -230,8 +230,8 @@
     "_enabled": true,
     "_designResolution": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 640,
+      "height": 960
     },
     "_fitWidth": false,
     "_fitHeight": true,
@@ -250,6 +250,7 @@
     "gameHandler": {
       "__id__": 7
     },
+    "up": false,
     "_id": "594sMiASRGgYiy5y2g6Vbe"
   },
   {
@@ -398,8 +399,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 257,
-      "y": 535,
+      "x": 95,
+      "y": 589,
       "z": 0
     },
     "_scale": {
@@ -484,8 +485,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 445,
-      "y": 377,
+      "x": 100,
+      "y": 492,
       "z": 0
     },
     "_scale": {
