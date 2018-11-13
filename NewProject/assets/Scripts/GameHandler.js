@@ -91,12 +91,7 @@ cc.Class({
 
     //The input event calls this, this then handles the logic to see if the input
     // is correct or not
-    SubmitCommand(sentCommand){
-        console.log("current command " + this.currentCommand);
-        if(this.currentCommand == undefined){
-            console.log("CurrentCommand is undefined for some reason?");
-        }
-        console.log(sentCommand);
+    SubmitCommand(sentCommand){        
         if(sentCommand == this.currentCommand){
             this.AdvanceToNextCommand();
         }
