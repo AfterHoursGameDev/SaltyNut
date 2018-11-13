@@ -58,32 +58,29 @@ cc.Class({
 
         this.node.on(cc.Node.EventType.TOUCH_MOVE,function(event){
             if(this.touching){
-                var dy = event.getDelta().y;
-                if(dy > 30){
+                let dy = event.getDelta().y;
+                console.log("The vertical delta : " + dy.toString());
+                if(dy > 15){
                     console.log("Up swipe detected");
-                    this.node.emit("inputevent",{
-                        msg: "swipeup"
-                    });
-                    this.eventFired = !this.eventFired;
+                    
+                    this.eventFired = true;
                     this.up = true;
                 }
-                else if(dy < -30){
+                else if(dy < -15){
                     console.log("down swipe detected");
-                    this.node.emit("inputevent", {
-                        msg: "swipedown"
-                    });
-                    this.eventFired = !this.eventFired;
+                    
+                    this.eventFired = true;
                     this.up = false;
                 }
             }
         }, this);
-
+        
         this.node.on(cc.Node.EventType.TOUCH_END, function(event){
             this.touching = !this.touching;
             console.log("Mouse up!")
             if(this.eventFired)
             {
-                this.eventFired = !this.eventFired;
+                this.eventFired = false;
                 if(this.up){
                     this.gameHandler.getComponent("GameHandler").SubmitCommand("POPIT");
                 }
@@ -94,10 +91,9 @@ cc.Class({
             else
             {
                 console.log("no swipe, but touch event detected");
-                this.node.emit("inputevent", {
-                    msg : "tap"
-                });
+                this.eventFired = false;
                 this.gameHandler.getComponent("GameHandler").SubmitCommand("GUNIT");
+                
             }
         },this);
 
@@ -106,7 +102,7 @@ cc.Class({
     },
 
     onDeviceMotionEvent : function(event){
-        //console.log("X ACCEL : " + event.acc.x + " , Y ACCEL : " + event.acc.y);
+        
 
         // Need to define the behavior for this
         let magnitude = Math.sqrt(Math.pow(event.acc.x, 2) + Math.pow(event.acc.y, 2) + Math.pow(event.acc.z,2)); 
