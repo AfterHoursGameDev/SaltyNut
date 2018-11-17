@@ -72,6 +72,14 @@ cc.Class({
         handControlNode : {
             default : null,
             type : cc.Node
+        },
+        badAudioNode : {
+            default : null,
+            type : cc.Node
+        },
+        goodAudioNode :{
+            default : null,
+            type : cc.Node
         }
     },
 
@@ -91,6 +99,8 @@ cc.Class({
         console.log("Advance to this command : " + this.currentCommand);
         this.SignalCommandToHandControl(this.currentCommand);
         
+        
+
         this.timer = this.threshold;
     },
 
@@ -112,16 +122,18 @@ cc.Class({
 
     // ends the game, triggers the transition to "EndScene"
     EndGame(){
-        this.sceneManager.getComponent("SceneHandler").LoadScene("EndScene");
+        this.sceneManager.getComponent("SceneHandler").LoadEndScene();
     },
 
     //The input event calls this, this then handles the logic to see if the input
     // is correct or not
     SubmitCommand(sentCommand){        
         if(sentCommand == this.currentCommand){
+            this.goodAudioNode.getComponent("AudioController").playAudio();
             this.AdvanceToNextCommand();
         }
         else{
+            this.badAudioNode.getComponent("AudioController").playAudio();
             this.EndGame();
         }
     },

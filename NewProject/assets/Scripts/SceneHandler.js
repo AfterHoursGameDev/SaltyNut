@@ -48,15 +48,20 @@ cc.Class({
     },
 
     LoadGameScene(){
-        cc.director.loadScene("GameScene");
+        setTimeout(function(){
+            cc.director.loadScene("GameScene");
+        },1000);
+       
     },
 
     LoadMenuScene(){
-        cc.director.loadScene("IntroScene");
+        setTimeout(function(){cc.director.loadScene("IntroScene");},1000);
+        
     },
 
     LoadEndScene(){
-        cc.director.loadScene("EndScene");
+        setTimeout(function(){cc.director.loadScene("EndScene");
+    },1000);
     },
 
     LoadDeviceMotionScene(){

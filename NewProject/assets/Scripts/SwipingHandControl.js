@@ -109,6 +109,17 @@ cc.Class({
         this.pokeHandNode.active = false;
         this.shakeNode.active = false;
 
+/*
+        this.arrowNode.active = false;
+        this.handNode.active = false;
+        this.pokeHandNode.active = false;
+        this.shakeNod
+*/
+
+        this.arrowNode.stopActions();
+        this.handNode.stopActions();
+        this.shakeNode.stopActions();   
+
         if(actionType == "up"){
             this.arrowNode.active = true;
             this.handNode.active = true;
