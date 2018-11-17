@@ -57,13 +57,21 @@ cc.Class({
             default : null,
             type : cc.Node
         },
-        sceneTimer:{
+        animationModule : {
+            default : null,
+            type : cc.Node
+        },
+        sceneTimer : {
             default : null,
             type : cc.Label
         },
-        commandLabel:{
+        commandLabel : {
             default : null,
             type: cc.Label
+        },
+        handControlNode : {
+            default : null,
+            type : cc.Node
         }
     },
 
@@ -81,7 +89,25 @@ cc.Class({
         this.currentCommand = this.GetNextCommand();
         this.commandLabel.string = this.currentCommand;
         console.log("Advance to this command : " + this.currentCommand);
+        this.SignalCommandToHandControl(this.currentCommand);
+        
         this.timer = this.threshold;
+    },
+
+    SignalCommandToHandControl(command){
+        console.log("inside singal command to hand control");
+        if(command == "POPIT"){
+            this.handControlNode.getComponent("SwipingHandControl").RunAction("up");
+        }
+        else if(command == "GUNIT"){
+            this.handControlNode.getComponent("SwipingHandControl").RunAction("poke");
+        }
+        else if(command == "SHAKITIT"){
+            this.handControlNode.getComponent("SwipingHandControl").RunAction("shake");
+        }
+        else if(command == "CRUSHIT"){
+            this.handControlNode.getComponent("SwipingHandControl").RunAction("down");
+        }
     },
 
     // ends the game, triggers the transition to "EndScene"

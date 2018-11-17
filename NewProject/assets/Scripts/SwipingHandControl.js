@@ -36,12 +36,16 @@ cc.Class({
             default : null,
             type: cc.Node
         },
+        shakeNode :{
+            default : null,
+            type : cc.Node
+        },
         up:{
             default: true
         },
         bottomPosition:{
             default : 0
-        },
+        }, 
         topPosition :{
             default : 0
         },
@@ -52,7 +56,16 @@ cc.Class({
         arrowRotation : {
             default: [],
             type: [cc.Action]
+        },
+        shakeRotation :{
+            default : null,
+            type : cc.Action
+        },
+        pokeHandNode : {
+            default : null,
+            type : cc.Node
         }
+        
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -80,28 +93,42 @@ cc.Class({
         );
         this.arrowRotation[0] = cc.rotateBy(0, 180);
         this.arrowRotation[1] = cc.rotateBy(0,0);
-       // this.arrowNode.runAction(this.arrowRotation);
-        this.RunAction("up");
+        
+        this.shakeRotation = cc.repeatForever(
+            cc.sequence(
+                cc.rotateBy(0.25,180),
+                cc.rotateBy(0.25,-180)
+            )
+        );
+        //this.shakeNode.runAction(this.shakeRotation);
     },
 
     RunAction(actionType){
-        
+        this.arrowNode.active = false;
+        this.handNode.active = false;
+        this.pokeHandNode.active = false;
+        this.shakeNode.active = false;
+
         if(actionType == "up"){
+            this.arrowNode.active = true;
+            this.handNode.active = true;
             this.arrowNode.runAction(this.arrowRotation[1]);
             this.handNode.runAction(this.verticalActions[0]);
-        }else{
+        }else if (actionType == "down"){
+            this.arrowNode.active = true;
+            this.handNode.active = true;
             this.arrowNode.runAction(this.arrowRotation[0]);
             this.handNode.runAction(this.verticalActions[0]);
+        }else if (actionType == "shake"){
+            this.shakeNode.active = true;
+            this.shakeNode.runAction(this.shakeRotation);
+        }
+        else if (actionType == "poke"){
+            this.pokeHandNode.active = true;
         }
     },
 
     update (dt) {
-        console.log("The hand position" + this.handNode.position);
-        if(this.up){
-            
-        }
-        else{
-
-        }
+        
     },
 });
