@@ -98,9 +98,6 @@ cc.Class({
         this.commandLabel.string = this.currentCommand;
         console.log("Advance to this command : " + this.currentCommand);
         this.SignalCommandToHandControl(this.currentCommand);
-        
-        
-
         this.timer = this.threshold;
     },
 

@@ -12,22 +12,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
-
         handNode : {
             default : null,
             type : cc.Node
@@ -65,11 +49,7 @@ cc.Class({
             default : null,
             type : cc.Node
         }
-        
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         
 
@@ -77,7 +57,11 @@ cc.Class({
 
     start () {
         this.bottomPosition = this.handNode.position.y;
-        this.topPosition = this.handNode.position.y;
+        this.topPosition = this.handNode.position.y + 350;
+
+        console.log("top position : " + this.topPosition);
+        console.log("bottom position " + this.bottomPosition);
+
         console.log(this.handNode);
         this.verticalActions[0] = cc.repeatForever(
             cc.sequence(
@@ -100,25 +84,23 @@ cc.Class({
                 cc.rotateBy(0.25,-180)
             )
         );
-        //this.shakeNode.runAction(this.shakeRotation);
     },
 
     RunAction(actionType){
+
+        // Set everything active to false
+
         this.arrowNode.active = false;
         this.handNode.active = false;
         this.pokeHandNode.active = false;
         this.shakeNode.active = false;
+        //console.log(this.arrowNode.active);
+                
+        // Turn off all actions currently running actions
 
-/*
-        this.arrowNode.active = false;
-        this.handNode.active = false;
-        this.pokeHandNode.active = false;
-        this.shakeNod
-*/
-
-        this.arrowNode.stopActions();
-        this.handNode.stopActions();
-        this.shakeNode.stopActions();   
+        if(this.arrowNode.getNumberOfRunningActions() > 0) this.arrowNode.stopAllActions();
+        if(this.handNode.getNumberOfRunningActions() > 0) this.handNode.stopAllActions();
+        if(this.shakeNode.getNumberOfRunningActions() > 0) this.shakeNode.stopAllActions();
 
         if(actionType == "up"){
             this.arrowNode.active = true;
@@ -129,7 +111,7 @@ cc.Class({
             this.arrowNode.active = true;
             this.handNode.active = true;
             this.arrowNode.runAction(this.arrowRotation[0]);
-            this.handNode.runAction(this.verticalActions[0]);
+            this.handNode.runAction(this.verticalActions[1]);
         }else if (actionType == "shake"){
             this.shakeNode.active = true;
             this.shakeNode.runAction(this.shakeRotation);
@@ -137,9 +119,5 @@ cc.Class({
         else if (actionType == "poke"){
             this.pokeHandNode.active = true;
         }
-    },
-
-    update (dt) {
-        
     },
 });

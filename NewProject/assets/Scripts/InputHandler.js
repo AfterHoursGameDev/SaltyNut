@@ -51,11 +51,14 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+
+        //Handle touch down
         this.node.on(cc.Node.EventType.TOUCH_START, function(event){
             console.log("Mouse down!");
             this.touching = !this.touching;
         },this);
 
+        //Handle touch move
         this.node.on(cc.Node.EventType.TOUCH_MOVE,function(event){
             if(this.touching){
                 let dy = event.getDelta().y;
@@ -75,6 +78,7 @@ cc.Class({
             }
         }, this);
         
+        //handle touch up
         this.node.on(cc.Node.EventType.TOUCH_END, function(event){
             this.touching = !this.touching;
             console.log("Mouse up!")
@@ -96,6 +100,13 @@ cc.Class({
                 
             }
         },this);
+
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, function(event){
+            if(event.keyCode == cc.macro.KEY.a){
+                console.log("Shaking the phone sim");
+                this.gameHandler.getComponent("GameHandler").SubmitCommand("SHAKEIT");
+            }
+        }, this);
 
         cc.systemEvent.setAccelerometerEnabled(true);
         cc.systemEvent.on(cc.SystemEvent.EventType.DEVICEMOTION, this.onDeviceMotionEvent,this);
