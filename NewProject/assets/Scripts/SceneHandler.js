@@ -69,6 +69,16 @@ cc.Class({
     },
 
     ShareToFacebook(){
+
+
+	 let myData = FBInstant.getEntrypointData() ;
+	
+FBInstant.shareAsync({
+  intent: 'REQUEST',
+  image: myBase64Picture,
+  text: 'Hey I\'m stuck on this puzzle! Can you help me?',
+  data: myData,
+})
         //This will handle all of the generic facebook shenanigans
         console.log("This is where facebook stuff would be");
     }
