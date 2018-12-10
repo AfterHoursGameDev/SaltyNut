@@ -30,7 +30,10 @@ cc.Class({
         score: {
             default : 0
         },
-
+        labelStuff :{
+            default : null,
+            type : cc.Label
+        }
     },
 
     // Custom Methods
@@ -71,19 +74,25 @@ cc.Class({
     ShareToFacebook(){
 
 
-	 let myData = FBInstant.getEntrypointData() ;
-	
-FBInstant.shareAsync({
-  intent: 'REQUEST',
-  image: myBase64Picture,
-  text: 'Hey I\'m stuck on this puzzle! Can you help me?',
-  data: myData,
-})
-        //This will handle all of the generic facebook shenanigans
-        console.log("This is where facebook stuff would be");
+	let myData = FBInstant.getEntrypointData() ;
+	try{
+        FBInstant.shareAsync({
+            intent: 'REQUEST',
+            image: myBase64Picture,
+            text: 'Hey I\'m stuck on this puzzle! Can you help me?',
+            data: myData,
+        }).then(
+            this.labelStuff.string = "PUSHED UP TO FACEBOOK"
+        );
+            //This will handle all of the generic facebook shenanigans
+            console.log("This is where facebook stuff would be");
+        }
+        catch(e){
+            this.labelStuff.string = "ERRRORRRORORRORO" + e.message;
+        }
     }
-
     
+
 
     // update (dt) {},
 });
