@@ -1,34 +1,8 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-
 cc.Class({
     extends: cc.Component,
 
-
     properties: 
     {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
         timer : {
             default: 0
         },
@@ -44,6 +18,9 @@ cc.Class({
         command : {
             default: []
         },
+        gameCommandQueue :{
+            default : []
+        },
         actionObject :{
             default : undefined
         },
@@ -53,11 +30,13 @@ cc.Class({
         score :{
             default : 0
         },
-        sceneManager :{
-            default : null,
-            type : cc.Node
+        gameState: {
+            default : null
         },
-        animationModule : {
+        currentState :{
+            default : null
+        },
+        sceneManager :{
             default : null,
             type : cc.Node
         },
@@ -82,6 +61,12 @@ cc.Class({
             type : cc.Node
         }
     },
+
+    /*
+        Valid "active steps" are 
+        * NONE
+        * 
+    */
 
 
     // Get the next command in the order (there currently is no object end to the experience)
@@ -128,6 +113,7 @@ cc.Class({
         if(sentCommand == this.currentCommand){
             this.goodAudioNode.getComponent("AudioController").playAudio();
             this.AdvanceToNextCommand();
+
         }
         else{
             this.badAudioNode.getComponent("AudioController").playAudio();
@@ -135,6 +121,98 @@ cc.Class({
         }
     },
    
+    AdvanceScore(){
+        this.score = this.score + 1;
+        if(this.score % 10 === 0){
+            this.TransitionToNextDifficulty();
+        }
+    },
+
+    // State methods
+
+    HandleState(deltaTime){
+        this.timer = this.timer - deltaTime;
+        switch(this.currentState){
+            case this.gameState.NONE:
+                break;
+            case this.gameState.START:
+                break;
+            case this.gameState.GAME:
+                RunGame(deltaTime);
+                break;
+            case this.gameState.TRANSITION:
+                break;
+            case this.END:
+                break;
+        }
+    },
+
+    // Game State Methods
+
+    RunGame(deltaTime){
+        this.sceneTimer.string = this.timer.toString().split(".")[0];
+        if(this.timer < 0){
+            //End game transition
+            //this.EndGame();
+            this.TransitionToEndGame();
+            this.timer = 0;
+        }
+    },
+
+    NextDifficulty(deltaTime){
+        if(this.timer < 0 && this.gameCommandQueue.length > 0){
+            
+        }
+    },
+
+
+    // State transitions
+
+    TransitionToNextDifficulty(){
+        this.currentState = this.gameState.TRANSITION;
+    },
+
+    TransitionToEndGame(){
+        this.currentState = this.gameState.END;
+    },
+
+    TransitionToGameStart(){
+        this.currentState = this.gameState.START;
+    },
+
+    TransitionToNone(){
+        this.currentState = this.gameState.NONE;
+    },
+
+    TransitionToGame(){
+        this.currentState = this.gameState.GAME;
+    },
+
+    // State Object Constructors
+
+    BuildTransitionQueue(){
+        transitionQueue = [];
+        //Add "SPEAK"
+        transitionQueue.add(function(audioNode){
+            audioNode.getComponent("AudioController").playAudio();
+        });
+        //Add "Pause"
+        transitionQueue.add();
+        //Add "SPEAK"
+        transitionQueue.add(function(audioNode){
+            audioNode.getComponent("AudioController").playAudio();
+        });
+        //Add "Pause"
+        transitionQueue.add();
+        return transitionQueue.reverse();
+    },
+
+    // State Object Methods 
+
+    speak(audioNode){
+        audioNode.getComponent("AudioController").playAudio();
+    },
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () 
@@ -142,6 +220,14 @@ cc.Class({
         this.command = ["POPIT","GUNIT","SHAKEIT","CRUSHIT"];
         this.sceneManager = cc.find("SceneHandler");
         this.timer = this.threshold;
+        this.gameState = {
+            NONE : 0,
+            START : 1,
+            GAME : 2,
+            END : 3,
+            TRANSITION : 4
+        };
+        this.currentState = this.gameState.NONE;
     },
 
     start () 
@@ -151,12 +237,6 @@ cc.Class({
 
     update (dt) 
     {
-        this.timer = this.timer - dt;
-        this.sceneTimer.string = this.timer.toString().split(".")[0];
-        if(this.timer < 0){
-            //End game transition
-            this.EndGame();
-            this.timer = 0;
-        }
+        this.HandleState(dt);
     },
 });
