@@ -1,10 +1,11 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.0",
   "uuid": "38905d41-343a-451f-92c8-832d425530c0",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": true,
+  "platformSettings": {},
   "subMetas": {
     "AniHands_icons": {
       "ver": "1.0.3",
