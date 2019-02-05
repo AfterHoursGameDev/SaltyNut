@@ -10,7 +10,12 @@
   "appKey": "",
   "appSecret": "",
   "encryptJs": true,
-  "excludeScenes": [],
+  "excludeScenes": [
+    "2c737ad4-b022-4e10-82c0-6e9ee1d97feb",
+    "8d4af2d4-be7d-4bcc-905c-c3089435fe97",
+    "2a3a8bef-d3af-4370-aa35-3dfa95e873d0",
+    "1cca7e97-8eb3-4e92-9875-467155bf629a"
+  ],
   "fb-instant-games": {},
   "includeAnySDK": false,
   "includeSDKBox": false,
@@ -33,9 +38,9 @@
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "startScene": "1cca7e97-8eb3-4e92-9875-467155bf629a",
-  "title": "SAltySays",
-  "webOrientation": "auto",
+  "startScene": "d3009bb4-d425-4140-8daa-8701f7c3665a",
+  "title": "SaltySays",
+  "webOrientation": "portrait",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
     "appid": "wx6ac3f5090a6b99c5",
