@@ -94,11 +94,15 @@ cc.Class({
             }
             else{
                 // This is where we allow user input
-                
+                this.gameRunning = true;
             }
         },this.currentFlashInterval)
     },
 
+    SetArrowAcceptInput(canAccept){
+        this.DownArrowController.getComponent("ArrowFlashControl").SetAcceptInput(canAccept);
+        this.UpArrowController.getComponent("ArrowFlashControl").SetAcceptInput(canAccept);
+    },
 
     start () {
 

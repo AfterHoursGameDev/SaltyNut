@@ -27,6 +27,30 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        AcceptInput : {
+            default : false
+        },
+        dullArrow : {
+            default : null,
+            type : cc.Node
+        },
+        glowingArrow : {
+            default : null,
+            type : cc.Node
+        }
+    },
+    
+    Flash(duration){
+        this.dullArrow.active = false;
+        this.glowingArrow.active = true;
+        this.scheduleOnce(function(){
+            this.dullArrow.active = true;
+            this.glowingArrow.active = false;
+        }, duration);
+    },
+    
+    SetAcceptInput(){
+
     },
 
     // LIFE-CYCLE CALLBACKS:
