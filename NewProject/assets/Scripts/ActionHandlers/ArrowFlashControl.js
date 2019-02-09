@@ -27,31 +27,9 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        homeScene : {
-            default : null,
-            type : cc.Node
-        },
-        gameScene : {
-            default:null,
-            type: cc.Node
-        },
-        endScene : {
-            default : null,
-            type : cc.Node
-        },
-        gameRunning : {
-            default : false
-        },
-        gameStartTimer : {
-            default : 3
-        },
-        gameHandler:{
-            default: null,
-            type : cc.Node
-        }
     },
 
-    
+    // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
 
@@ -59,27 +37,5 @@ cc.Class({
 
     },
 
-    StartGameScene(){
-        this.homeScene.active = false;
-        this.gameScene.active = true;
-        this.scheduleOnce(this.StartGame(), this.gameStartTimer); 
-    },
-    EndGame(){
-        this.endScene.active =true;
-    },
-    ReturnToMain(){
-        this.endScene.active = false;
-        this.gameScene.active = false;
-    },
-    RestartGame(){
-        this.endScene.active = false;
-    },
-    StartGame(){
-        this.gameHandler.getComponent("GameHandler").StartGame();
-    },
-    
-
-    // Life Cycle / Physics 
-
-    update (dt) {},
+    // update (dt) {},
 });
