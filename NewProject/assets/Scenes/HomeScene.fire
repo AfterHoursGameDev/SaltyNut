@@ -2057,7 +2057,7 @@
     },
     "component": "",
     "_componentId": "05835eLzs1BWpF1crtl2Ehg",
-    "handler": "RestartGame",
+    "handler": "StartGameWithDifficultyIncrease",
     "customEventData": ""
   },
   {

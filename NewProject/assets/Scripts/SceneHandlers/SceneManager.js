@@ -39,6 +39,11 @@ cc.Class({
             default : null,
             type : cc.Node
         },
+        congratsScene:{
+            default: null,
+            type :cc.Node
+        }
+        ,
         gameRunning : {
             default : false
         },
@@ -61,11 +66,16 @@ cc.Class({
 
     StartGameScene(){
         this.homeScene.active = false;
+        this.endScene.active = false;
+        this.congratsScene.active = false;
         this.gameScene.active = true;
         this.scheduleOnce(this.StartGame(), this.gameStartTimer); 
     },
     EndGame(){
         this.endScene.active =true;
+    },
+    StartCongratsScene(){
+        this.congratsScene.active = true;
     },
     ReturnToMain(){
         this.endScene.active = false;
