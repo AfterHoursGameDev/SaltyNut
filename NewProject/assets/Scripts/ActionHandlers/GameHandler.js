@@ -68,6 +68,9 @@ cc.Class({
         },
         flashDuration : {
             default : 0.5
+        },
+        currentInputIndex :{
+            default : 0
         }
 
     },
@@ -95,8 +98,38 @@ cc.Class({
             else{
                 // This is where we allow user input
                 this.gameRunning = true;
+                this.SetArrowAcceptInput(true);
             }
         },this.currentFlashInterval)
+    },
+
+    SendInput(value){
+        if(value == listOfInputs[this.currentInputIndex]){
+            // Valid input
+            // play valid input noise
+            // increment currentInputIndex
+            this.currentInputIndex++;
+            // check to see if the current round is over
+            if(this.currentInputIndex > this.currentInputLimit){
+                this.currentInputLimit++
+                if(this.currentInputLimit == this.listOfInputs.length){
+                    //The round is over, trigger a "congrats" and advance to next difficulty
+                    this.PresentCongratulation();
+                }
+                else{
+                    //The round isn't over, advance tp mext inputLimit
+                    this.PresentInstruction();
+                }
+            }
+        }
+        else{
+            // Invalid Input
+            this.SetArrowAcceptInput(false);
+        }
+    },
+
+    PresentCongratulation(){
+
     },
 
     SetArrowAcceptInput(canAccept){
@@ -126,12 +159,12 @@ cc.Class({
 
     //
 
-
     update (dt) {
         if(this.gameRunning){
             this.timer = this.timer + dt;
             if(this.timer > this.maxWaitTime){
                 //the player has failed the input and game ends
+                this.SetArrowAcceptInput(false);
             }
         }
         else{

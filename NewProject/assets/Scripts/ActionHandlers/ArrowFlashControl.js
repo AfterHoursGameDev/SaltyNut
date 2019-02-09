@@ -37,7 +37,15 @@ cc.Class({
         glowingArrow : {
             default : null,
             type : cc.Node
+        },
+        gameHandler :{
+            default : null,
+            type : cc.Node
+        },
+        UpDownValue:{
+            default : 0
         }
+
     },
     
     Flash(duration){
@@ -49,8 +57,13 @@ cc.Class({
         }, duration);
     },
     
-    SetAcceptInput(){
-
+    SetAcceptInput(acceptInput){
+        this.AcceptInput = acceptInput;
+    },
+    InputEvent(){
+        if(this.AcceptInput){
+            gameHandler.getComponent("GameHandler").SendInput(UpDownValue);
+        }  
     },
 
     // LIFE-CYCLE CALLBACKS:
