@@ -77,6 +77,9 @@ cc.Class({
     StartGame(){
         this.gameHandler.getComponent("GameHandler").StartGame();
     },
+    StartGameWithDifficultyIncrease(){
+        this.gameHandler.getComponent("GameHandler").StartGameEnchanceDifficulty();
+    },
     
 
     // Life Cycle / Physics 

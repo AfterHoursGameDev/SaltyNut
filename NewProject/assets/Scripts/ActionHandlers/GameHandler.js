@@ -39,6 +39,12 @@ cc.Class({
             type : cc.Node
         },
 
+        // Scene Controller
+        
+        sceneController  : {
+            default : null,
+            type : cc.Node
+        },
 
         // Booleans for game state
         gameRunning : {
@@ -82,6 +88,13 @@ cc.Class({
         this.listOfInputs = this.BuildInputList(this.inputLength);
         this.PresentInstruction();
     },
+    StartGameEnhanceDifficulty(){
+        this.inputLength = this.inputLength + 1;
+        this.currentFlashInterval = this.currentFlashInterval - 0.1;
+        this.flashDuration = this.flashDuration - 0.05;
+        this.listOfInputs = this.BuildInputList(this.inputLength);
+        this.PresentInstruction();
+    },
 
     PresentInstruction(){
         let i = 0;
@@ -114,10 +127,14 @@ cc.Class({
                 this.currentInputLimit++
                 if(this.currentInputLimit == this.listOfInputs.length){
                     //The round is over, trigger a "congrats" and advance to next difficulty
+                    this.gameRunning = false;
+                    this.timer = 0;
                     this.PresentCongratulation();
                 }
                 else{
                     //The round isn't over, advance tp mext inputLimit
+                    this.gameRunning = false;
+                    this.timer = 0;
                     this.PresentInstruction();
                 }
             }
