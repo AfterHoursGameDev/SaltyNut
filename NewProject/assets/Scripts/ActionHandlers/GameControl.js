@@ -212,6 +212,8 @@ cc.Class({
             this.timer = this.timer + dt;
             if(this.timer > this.maxWaitTime){
                 //the player has failed the input and game ends
+                this.gameRunning = false;
+                this.timer = 0;
                 this.SetArrowAcceptInput(false);
                 this.sceneController.getComponent("SceneManager").EndGame();
             }
