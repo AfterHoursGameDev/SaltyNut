@@ -430,7 +430,7 @@
         "__id__": 16
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [],
     "_prefab": null,
@@ -855,7 +855,7 @@
         "__id__": 50
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [],
     "_prefab": null,
@@ -2280,7 +2280,7 @@
         "__id__": 57
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 3,
     "_components": [],
     "_prefab": null,
@@ -2624,7 +2624,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 253,
+      "y": 212,
       "z": 0
     },
     "_scale": {

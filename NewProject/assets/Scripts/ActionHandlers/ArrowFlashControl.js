@@ -62,7 +62,8 @@ cc.Class({
     },
     InputEvent(){
         if(this.AcceptInput){
-            this.gameHandler.getComponent("GameControl").SendInput(UpDownValue);
+            this.gameHandler.getComponent("GameControl").SendInput(this.UpDownValue);
+            this.Flash(0.25);
         }  
     },
 

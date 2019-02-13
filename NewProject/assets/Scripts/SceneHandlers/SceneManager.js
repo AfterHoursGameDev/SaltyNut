@@ -84,13 +84,14 @@ cc.Class({
     },
     RestartGame(){
         this.endScene.active = false;
+        this.gameController.getComponent("GameControl").StartGame();
     },
     StartGame(){
         this.gameController.getComponent("GameControl").StartGame();
     },
     StartGameWithDifficultyIncrease(){
         this.congratsScene.active = false;
-        this.gameController.getComponent("GameControl").StartGameEnchanceDifficulty();
+        this.gameController.getComponent("GameControl").StartGameEnhanceDifficulty();
     },
     
 
