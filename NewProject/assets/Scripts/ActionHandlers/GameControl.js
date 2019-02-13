@@ -102,7 +102,7 @@ cc.Class({
             if(i < this.currentInputLimit){
                 // this is where the flashing happens
                 if(this.listOfInputs[i] === 0){
-                    this.DownArrowController.getComponent("ArrorFlashControl").Flash(this.flashDuration);
+                    this.DownArrowController.getComponent("ArrowFlashControl").Flash(this.flashDuration);
                 }else{
                     this.UpArrowController.getComponent("ArrowFlashControl").Flash(this.flashDuration);
                 }
@@ -163,15 +163,14 @@ cc.Class({
     BuildInputList(numInputs){
         let tempArray = [];
         for(let i = 0; i < numInputs; i++){
-            let randNum = Math.random() * 100;
-            if(randNum > 50){
-                tempArray.push(1);
-            }
-            else{
-                tempArray.push(0);
-            }
+            let randNum = this.GetRandomInt(2);
+            tempArray.push(randNum);    
         }
         return tempArray;
+    },
+
+    GetRandomInt(max){
+        return Math.floor(Math.random() * Math.floor(max));
     },
 
     //

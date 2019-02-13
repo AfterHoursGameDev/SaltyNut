@@ -62,7 +62,7 @@ cc.Class({
     },
     InputEvent(){
         if(this.AcceptInput){
-            gameHandler.getComponent("GameHandler").SendInput(UpDownValue);
+            this.gameHandler.getComponent("GameControl").SendInput(UpDownValue);
         }  
     },
 

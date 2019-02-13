@@ -50,7 +50,7 @@ cc.Class({
         gameStartTimer : {
             default : 3
         },
-        gameHandler:{
+        gameController:{
             default: null,
             type : cc.Node
         }
@@ -69,7 +69,8 @@ cc.Class({
         this.endScene.active = false;
         this.congratsScene.active = false;
         this.gameScene.active = true;
-        this.scheduleOnce(this.StartGame(), this.gameStartTimer); 
+        //this.scheduleOnce(this.StartGame(), this.gameStartTimer); 
+        this.StartGame();
     },
     EndGame(){
         this.endScene.active =true;
@@ -85,10 +86,11 @@ cc.Class({
         this.endScene.active = false;
     },
     StartGame(){
-        this.gameHandler.getComponent("GameHandler").StartGame();
+        this.gameController.getComponent("GameControl").StartGame();
     },
     StartGameWithDifficultyIncrease(){
-        this.gameHandler.getComponent("GameHandler").StartGameEnchanceDifficulty();
+        this.congratsScene.active = false;
+        this.gameController.getComponent("GameControl").StartGameEnchanceDifficulty();
     },
     
 
