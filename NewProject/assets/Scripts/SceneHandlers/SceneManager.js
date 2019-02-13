@@ -83,6 +83,7 @@ cc.Class({
         this.gameScene.active = false;
     },
     RestartGame(){
+        console.log("Game restarting");
         this.endScene.active = false;
         this.gameController.getComponent("GameControl").StartGame();
     },

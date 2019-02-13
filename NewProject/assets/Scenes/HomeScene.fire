@@ -430,7 +430,7 @@
         "__id__": 16
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [],
     "_prefab": null,
@@ -855,7 +855,7 @@
         "__id__": 50
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [],
     "_prefab": null,
@@ -1329,6 +1329,8 @@
     "currentFlashInterval": 1.5,
     "flashDuration": 0.5,
     "currentInputIndex": 0,
+    "flashCallback": null,
+    "counter": 0,
     "_id": "ddfOW3ioxHGpJWxxJdlKxy"
   },
   {
@@ -1780,7 +1782,7 @@
         "__id__": 48
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 3,
     "_components": [],
     "_prefab": null,

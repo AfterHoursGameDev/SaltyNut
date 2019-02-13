@@ -97,6 +97,10 @@ cc.Class({
 
     // onLoad () {},
     StartGame(){
+        this.currentInputLimit = 2;
+        this.inputLength = 5;
+        this.currentFlashInterval = 1.5;
+        this.flashDuration = 0.5;
         this.listOfInputs = this.BuildInputList(this.inputLength);
         this.PresentInstruction();
     },
