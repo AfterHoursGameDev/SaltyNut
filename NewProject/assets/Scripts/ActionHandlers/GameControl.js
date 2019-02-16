@@ -38,6 +38,11 @@ cc.Class({
             default : null,
             type : cc.Node
         },
+        CanArrowController :{
+            default: null,
+            type : cc.Node
+        },
+
 
         // Scene Controller
         
@@ -97,12 +102,16 @@ cc.Class({
 
     // onLoad () {},
     StartGame(){
+        this.ResetValues();
+        this.listOfInputs = this.BuildInputList(this.inputLength);
+        this.PresentInstruction();
+    },
+    ResetValues(){
+        this.currentInputIndex = 0;
         this.currentInputLimit = 2;
         this.inputLength = 5;
         this.currentFlashInterval = 1.5;
         this.flashDuration = 0.5;
-        this.listOfInputs = this.BuildInputList(this.inputLength);
-        this.PresentInstruction();
     },
     StartGameEnhanceDifficulty(){
         console.log("INCREASING DIFFICULTY");
@@ -127,11 +136,13 @@ cc.Class({
             // increment currentInputIndex
             this.currentInputIndex++;
             // check to see if the current round is over
+            console.log("current input limit : " + this.currentInputLimit);
+            console.log("current input index : " + this.currentInputIndex);
             if(this.currentInputIndex >= this.currentInputLimit){
                 this.currentInputIndex = 0;
                 this.currentInputLimit++
                 console.log("Player has finished the cycle");
-                if(this.currentInputLimit == this.listOfInputs.length){
+                if(this.currentInputLimit > this.listOfInputs.length){
                     //The round is over, trigger a "congrats" and advance to next difficulty
                     this.gameRunning = false;
                     this.timer = 0;
@@ -160,6 +171,7 @@ cc.Class({
     SetArrowAcceptInput(canAccept){
         this.DownArrowController.getComponent("ArrowFlashControl").SetAcceptInput(canAccept);
         this.UpArrowController.getComponent("ArrowFlashControl").SetAcceptInput(canAccept);
+        this.CanArrowController.getComponent("ArrowFlashControl").SetAcceptInput(canAccept);
     },
 
     start () {
@@ -170,11 +182,12 @@ cc.Class({
 
     BuildInputList(numInputs){
         let tempArray = [];
-        for(let i = 0; i < numInputs; i++){
+        for(let i = 0; i < numInputs - 1; i++){
             let randNum = this.GetRandomInt(2);
             tempArray.push(randNum);    
         }
         tempArray.push(2);
+        console.log(tempArray);
         return tempArray;
     },
 
@@ -189,11 +202,17 @@ cc.Class({
             
             if(this.counter < this.currentInputLimit){
                 // this is where the flashing happens
-                console.log(this.counter);
+                
                 if(this.listOfInputs[this.counter] === 0){
+                    console.log(this.counter);
                     this.DownArrowController.getComponent("ArrowFlashControl").Flash(this.flashDuration);
-                }else{
+                }else if(this.listOfInputs[this.counter] === 1){
+                    console.log(this.counter);
                     this.UpArrowController.getComponent("ArrowFlashControl").Flash(this.flashDuration);
+                }
+                else if(this.listOfInputs[this.counter] === 2){
+                    console.log(this.counter);
+                    this.CanArrowController.getComponent("ArrowFlashControl").FlashCan(this.flashDuration);
                 }
                 this.counter++;
             }

@@ -34,6 +34,10 @@ cc.Class({
             default : null,
             type : cc.Node
         },
+        CanNode :{
+            default : null,
+            type : cc.Node
+        },
         glowingArrow : {
             default : null,
             type : cc.Node
@@ -49,11 +53,23 @@ cc.Class({
     },
     
     Flash(duration){
-        this.dullArrow.active = false;
-        this.glowingArrow.active = true;
+        
+            console.log(this.name);
+            this.dullArrow.active = false;
+            this.glowingArrow.active = true;
+        
+            this.scheduleOnce(function()
+            {
+                this.dullArrow.active = true;
+                this.glowingArrow.active = false;
+            }, duration);
+        
+    },
+    
+    FlashCan(duration){
+        this.CanNode.angle = 15;
         this.scheduleOnce(function(){
-            this.dullArrow.active = true;
-            this.glowingArrow.active = false;
+            this.CanNode.angle = 0;
         }, duration);
     },
     
@@ -61,10 +77,15 @@ cc.Class({
         this.AcceptInput = acceptInput;
     },
     InputEvent(){
-        if(this.AcceptInput){
+        console.log(this.dullArrow);
+        if(this.AcceptInput && (this.dullArrow != null)){
             this.gameHandler.getComponent("GameControl").SendInput(this.UpDownValue);
             this.Flash(0.25);
         }  
+        else{
+            this.gameHandler.getComponent("GameControl").SendInput(this.UpDownValue);
+            this.FlashCan(0.25);
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:

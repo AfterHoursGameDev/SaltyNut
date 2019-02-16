@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5212733781008789,
-      "y": 0.5212733781008789,
-      "z": 0.5212733781008789
+      "x": 0.5142213719868263,
+      "y": 0.5142213719868263,
+      "z": 0.5142213719868263
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -85,6 +85,9 @@
         "__id__": 29
       },
       {
+        "__id__": 37
+      },
+      {
         "__id__": 9
       },
       {
@@ -95,7 +98,7 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 59
+        "__id__": 63
       }
     ],
     "_prefab": null,
@@ -400,10 +403,10 @@
       "__id__": 18
     },
     "endScene": {
-      "__id__": 39
+      "__id__": 43
     },
     "congratsScene": {
-      "__id__": 50
+      "__id__": 54
     },
     "gameRunning": false,
     "gameStartTimer": 3,
@@ -840,7 +843,7 @@
         "__id__": 31
       },
       {
-        "__id__": 37
+        "__id__": 39
       },
       {
         "__id__": 25
@@ -849,10 +852,10 @@
         "__id__": 35
       },
       {
-        "__id__": 39
+        "__id__": 43
       },
       {
-        "__id__": 50
+        "__id__": 54
       }
     ],
     "_active": false,
@@ -1146,6 +1149,7 @@
     "dullArrow": {
       "__id__": 19
     },
+    "CanNode": null,
     "glowingArrow": {
       "__id__": 25
     },
@@ -1317,6 +1321,9 @@
     "DownArrowController": {
       "__id__": 29
     },
+    "CanArrowController": {
+      "__id__": 37
+    },
     "sceneController": {
       "__id__": 7
     },
@@ -1405,6 +1412,7 @@
     "dullArrow": {
       "__id__": 31
     },
+    "CanNode": null,
     "glowingArrow": {
       "__id__": 35
     },
@@ -1675,6 +1683,86 @@
   },
   {
     "__type__": "cc.Node",
+    "_name": "CanController",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 38
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "_is3DNode": false,
+    "groupIndex": 0,
+    "_id": "d4D2Ss22pEn54ew9XaDU2A"
+  },
+  {
+    "__type__": "12659DLq6pEa5jOuK0OM46t",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 37
+    },
+    "_enabled": true,
+    "AcceptInput": false,
+    "dullArrow": null,
+    "CanNode": {
+      "__id__": 39
+    },
+    "glowingArrow": null,
+    "gameHandler": {
+      "__id__": 27
+    },
+    "UpDownValue": 2,
+    "_id": "f3uR6pPFRNSJLj06j8EuS+"
+  },
+  {
+    "__type__": "cc.Node",
     "_name": "Can",
     "_objFlags": 0,
     "_parent": {
@@ -1685,7 +1773,10 @@
     "_level": 3,
     "_components": [
       {
-        "__id__": 38
+        "__id__": 40
+      },
+      {
+        "__id__": 41
       }
     ],
     "_prefab": null,
@@ -1738,7 +1829,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 37
+      "__id__": 39
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -1762,6 +1853,86 @@
     "_id": "7aUf35hbFLRaR3ZLDtejyA"
   },
   {
+    "__type__": "cc.Button",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 39
+    },
+    "_enabled": true,
+    "duration": 0.1,
+    "zoomScale": 1.2,
+    "clickEvents": [
+      {
+        "__id__": 42
+      }
+    ],
+    "_N$interactable": true,
+    "_N$enableAutoGrayEffect": false,
+    "_N$transition": 0,
+    "transition": 0,
+    "_N$normalColor": {
+      "__type__": "cc.Color",
+      "r": 214,
+      "g": 214,
+      "b": 214,
+      "a": 255
+    },
+    "_N$pressedColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "pressedColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "_N$hoverColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "hoverColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_N$disabledColor": {
+      "__type__": "cc.Color",
+      "r": 124,
+      "g": 124,
+      "b": 124,
+      "a": 255
+    },
+    "_N$normalSprite": null,
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
+    "_N$disabledSprite": null,
+    "_N$target": null,
+    "_id": "12tqg1fUVLfbym4ZtK03Hq"
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 37
+    },
+    "component": "",
+    "_componentId": "12659DLq6pEa5jOuK0OM46t",
+    "handler": "InputEvent",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.Node",
     "_name": "EndScene",
     "_objFlags": 0,
@@ -1770,16 +1941,16 @@
     },
     "_children": [
       {
-        "__id__": 40
-      },
-      {
-        "__id__": 42
+        "__id__": 44
       },
       {
         "__id__": 46
       },
       {
-        "__id__": 48
+        "__id__": 50
+      },
+      {
+        "__id__": 52
       }
     ],
     "_active": false,
@@ -1835,14 +2006,14 @@
     "_name": "ScoreText",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 39
+      "__id__": 43
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 41
+        "__id__": 45
       }
     ],
     "_prefab": null,
@@ -1897,7 +2068,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 40
+      "__id__": 44
     },
     "_enabled": true,
     "_srcBlendFactor": 1,
@@ -1922,17 +2093,17 @@
     "_name": "Replay_button",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 39
+      "__id__": 43
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 43
+        "__id__": 47
       },
       {
-        "__id__": 44
+        "__id__": 48
       }
     ],
     "_prefab": null,
@@ -1985,7 +2156,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 42
+      "__id__": 46
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -2013,14 +2184,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 42
+      "__id__": 46
     },
     "_enabled": true,
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 45
+        "__id__": 49
       }
     ],
     "_N$interactable": true,
@@ -2093,14 +2264,14 @@
     "_name": "Share_button",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 39
+      "__id__": 43
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 47
+        "__id__": 51
       }
     ],
     "_prefab": null,
@@ -2153,7 +2324,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 46
+      "__id__": 50
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -2181,14 +2352,14 @@
     "_name": "bummer",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 39
+      "__id__": 43
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 49
+        "__id__": 53
       }
     ],
     "_prefab": null,
@@ -2241,7 +2412,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 48
+      "__id__": 52
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -2273,13 +2444,13 @@
     },
     "_children": [
       {
-        "__id__": 51
-      },
-      {
         "__id__": 55
       },
       {
-        "__id__": 57
+        "__id__": 59
+      },
+      {
+        "__id__": 61
       }
     ],
     "_active": false,
@@ -2335,17 +2506,17 @@
     "_name": "Replay_button",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 50
+      "__id__": 54
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 52
+        "__id__": 56
       },
       {
-        "__id__": 53
+        "__id__": 57
       }
     ],
     "_prefab": null,
@@ -2398,7 +2569,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 51
+      "__id__": 55
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -2426,14 +2597,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 51
+      "__id__": 55
     },
     "_enabled": true,
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 54
+        "__id__": 58
       }
     ],
     "_N$interactable": true,
@@ -2506,14 +2677,14 @@
     "_name": "Share_button",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 50
+      "__id__": 54
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 56
+        "__id__": 60
       }
     ],
     "_prefab": null,
@@ -2566,7 +2737,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 55
+      "__id__": 59
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -2594,14 +2765,14 @@
     "_name": "awesome",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 50
+      "__id__": 54
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 58
+        "__id__": 62
       }
     ],
     "_prefab": null,
@@ -2654,7 +2825,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 57
+      "__id__": 61
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -2690,7 +2861,7 @@
       "width": 640,
       "height": 960
     },
-    "_fitWidth": false,
+    "_fitWidth": true,
     "_fitHeight": true,
     "_id": "07Qj+3WzpN7J8gXTcQ1e5Y"
   }
