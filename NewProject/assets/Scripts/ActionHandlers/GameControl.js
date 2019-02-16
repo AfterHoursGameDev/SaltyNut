@@ -126,6 +126,7 @@ cc.Class({
 
     PresentInstruction(){
         // Need to unschedule this from happening!!!!
+        this.SetArrowAcceptInput(false);
         this.schedule(this.flashCallback,this.currentFlashInterval);
     },
 
@@ -159,7 +160,10 @@ cc.Class({
         }
         else{
             // Invalid Input
+            this.gameRunning = false;
+            this.timer = 0;
             this.SetArrowAcceptInput(false);
+            this.sceneController.getComponent("SceneManager").EndGame();
         }
     },
 

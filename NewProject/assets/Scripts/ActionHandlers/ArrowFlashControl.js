@@ -52,8 +52,7 @@ cc.Class({
 
     },
     
-    Flash(duration){
-        
+    Flash(duration){ 
             console.log(this.name);
             this.dullArrow.active = false;
             this.glowingArrow.active = true;
@@ -63,11 +62,11 @@ cc.Class({
                 this.dullArrow.active = true;
                 this.glowingArrow.active = false;
             }, duration);
-        
     },
     
     FlashCan(duration){
-        this.CanNode.angle = 15;
+        this.CanNode.angle = -15;
+        console.log("This is being called for some reason?");
         this.scheduleOnce(function(){
             this.CanNode.angle = 0;
         }, duration);
@@ -82,7 +81,7 @@ cc.Class({
             this.gameHandler.getComponent("GameControl").SendInput(this.UpDownValue);
             this.Flash(0.25);
         }  
-        else{
+        else if(this.AcceptInput && (this.CanNode != null)){
             this.gameHandler.getComponent("GameControl").SendInput(this.UpDownValue);
             this.FlashCan(0.25);
         }
