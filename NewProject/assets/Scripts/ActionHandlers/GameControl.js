@@ -7,6 +7,8 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var SoundManager = require("SoundManager");
+var SoundType = require("SoundType");
 
 cc.Class({
     extends: cc.Component,
@@ -132,6 +134,7 @@ cc.Class({
 
     SendInput(value){
         if(value == this.listOfInputs[this.currentInputIndex]){
+			window.SoundManager.playSound(SoundType.GoodInput, false);
             // Valid input
             // play valid input noise
             // increment currentInputIndex
@@ -159,6 +162,7 @@ cc.Class({
             }
         }
         else{
+			window.SoundManager.playSound(SoundType.FailedInput, false);
             // Invalid Input
             this.gameRunning = false;
             this.timer = 0;
@@ -207,6 +211,7 @@ cc.Class({
             if(this.counter < this.currentInputLimit){
                 // this is where the flashing happens
                 
+				window.SoundManager.playSound(SoundType.GoodInput, false);
                 if(this.listOfInputs[this.counter] === 0){
                     console.log(this.counter);
                     this.DownArrowController.getComponent("ArrowFlashControl").Flash(this.flashDuration);
@@ -235,6 +240,7 @@ cc.Class({
             this.timer = this.timer + dt;
             if(this.timer > this.maxWaitTime){
                 //the player has failed the input and game ends
+				window.SoundManager.playSound(SoundType.FailedInput, false);
                 this.gameRunning = false;
                 this.timer = 0;
                 this.SetArrowAcceptInput(false);

@@ -7,6 +7,8 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var SoundManager = require("SoundManager");
+var SoundType = require("SoundType");
 
 cc.Class({
     extends: cc.Component,
@@ -88,6 +90,7 @@ cc.Class({
         this.gameController.getComponent("GameControl").StartGame();
     },
     StartGame(){
+		window.SoundManager.playSound(SoundType.ButtonPress, false);
         this.gameController.getComponent("GameControl").StartGame();
     },
     StartGameWithDifficultyIncrease(){
