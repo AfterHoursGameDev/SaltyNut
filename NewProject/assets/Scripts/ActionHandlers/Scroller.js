@@ -15,14 +15,9 @@ cc.Class({
 	},
 
     update (dt) {
-//        if (D.game.state !== D.GameManager.State.Run) {
-//            return;
-//        }
 		var pos = this.node.getPosition();
         var x = pos.x;
-console.log("x=" + x + ", dt=" + dt + ", speed="+this.speed);
         x += this.speed * dt;
-console.log("newx = " + x);		
         if (x <= this.resetX) {
 			pos = this.resetPos;
         }
@@ -30,7 +25,6 @@ console.log("newx = " + x);
 		{
 			pos.x = x;
 		}
-console.log("pos = " + pos);
 		this.node.setPosition(pos);
     }
 });
