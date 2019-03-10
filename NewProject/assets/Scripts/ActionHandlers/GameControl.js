@@ -95,6 +95,10 @@ cc.Class({
         getSetGoText : {
             type: cc.Label,
             default : null
+        },
+        //Score
+        score :{
+            default : 0
         }
 
     },
@@ -112,7 +116,16 @@ cc.Class({
     StartGame(){
         this.ResetValues();
         this.listOfInputs = this.BuildInputList(this.inputLength);
+
+        this.sceneController.getComponent("SceneManager").GameStarted();
+
         this.PresentInstruction();
+    },
+
+    IncrementScore(){
+
+        this.score += 1;
+
     },
 
     ResetValues(){
@@ -131,6 +144,9 @@ cc.Class({
         this.currentFlashInterval = this.currentFlashInterval - 0.1;
         this.flashDuration = this.flashDuration - 0.05;
         this.listOfInputs = this.BuildInputList(this.inputLength);
+
+        this.sceneController.getComponent("SceneManager").GameStarted();
+
         this.PresentInstruction();
     },
 
@@ -148,12 +164,11 @@ cc.Class({
             // increment currentInputIndex
             this.currentInputIndex++;
             // check to see if the current round is over
-            console.log("current input limit : " + this.currentInputLimit);
-            console.log("current input index : " + this.currentInputIndex);
+            
             if(this.currentInputIndex >= this.currentInputLimit){
                 this.currentInputIndex = 0;
                 this.currentInputLimit++
-                console.log("Player has finished the cycle");
+                
                 if(this.currentInputLimit > this.listOfInputs.length){
                     //The round is over, trigger a "congrats" and advance to next difficulty
                     this.gameRunning = false;
@@ -162,7 +177,7 @@ cc.Class({
                 }
                 else{
                     //The round isn't over, advance tp mext inputLimit
-                    console.log("Presenting new instructions");
+                   
                     this.gameRunning = false;
                     this.timer = 0;
                     this.PresentInstruction();
@@ -175,7 +190,7 @@ cc.Class({
             this.gameRunning = false;
             this.timer = 0;
             this.SetArrowAcceptInput(false);
-            this.sceneController.getComponent("SceneManager").EndGame();
+            this.sceneController.getComponent("SceneManager").EndGame(this.score);
         }
     },
 
@@ -221,14 +236,14 @@ cc.Class({
                 
 				window.SoundManager.playSound(SoundType.GoodInput, false);
                 if(this.listOfInputs[this.counter] === 0){
-                    console.log(this.counter);
+                    
                     this.DownArrowController.getComponent("ArrowFlashControl").Flash(this.flashDuration);
                 }else if(this.listOfInputs[this.counter] === 1){
-                    console.log(this.counter);
+                   
                     this.UpArrowController.getComponent("ArrowFlashControl").Flash(this.flashDuration);
                 }
                 else if(this.listOfInputs[this.counter] === 2){
-                    console.log(this.counter);
+                    
                     this.CanArrowController.getComponent("ArrowFlashControl").FlashCan(this.flashDuration);
                 }
                 this.counter++;
@@ -252,7 +267,8 @@ cc.Class({
                 this.gameRunning = false;
                 this.timer = 0;
                 this.SetArrowAcceptInput(false);
-                this.sceneController.getComponent("SceneManager").EndGame();
+                console.log(this.score);
+                this.sceneController.getComponent("SceneManager").EndGame(this.score);
             }
         }
         else{

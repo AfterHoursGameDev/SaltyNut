@@ -41,48 +41,74 @@ cc.Class({
             default: null,
             type : cc.Node
         },
-        readySetGoText : {
-            type: cc.Label,
-            default : null
+        
+        readySetGoLabel :{
+            default: null,
+            type : cc.Label
+        },
+        scoreText : {
+            default: null,
+            type: cc.Label
         }
     },
 
-    start () {
+    onLoad(){
+        
+    },
 
+    start () {
+        
     },
 
     StartGameScene(){
+        //play the button press sound here
+
+		window.SoundManager.playSound(SoundType.ButtonPress, false);
+
+
+        this.scoreText.string = "";
+
         this.homeScene.active = false;
         this.endScene.active = false;
         this.congratsScene.active = false;
         this.gameScene.active = true;
-        //this.scheduleOnce(this.StartGame(), this.gameStartTimer);
-        this.readySetGoText.String = "READY!!";
-        this.readySetGoText.active = true; 
+
+        this.readySetGoLabel.string = "READY!!";
+        this.readySetGoLabel.active = true; 
         this.scheduleOnce(this.StartGame, this.gameStartTimer);
     },
     StartGameSceneEnhanceDifficulty(){
+
+		window.SoundManager.playSound(SoundType.ButtonPress, false);
+
+        this.scoreText.string = "";
+
         this.homeScene.active = false;
         this.endScene.active = false;
         this.congratsScene.active = false;
         this.gameScene.active = true;
-        //this.scheduleOnce(this.StartGame(), this.gameStartTimer);
-        readySetGoText.String = "READY"
-        readySetGoText.active = true; 
+        
+        this.readySetGoLabel.string = "READY"
+        this.readySetGoLabel.active = true; 
         this.scheduleOnce(this.StartGameWithDifficultyIncrease, this.gameStartTimer - 1.5);
     },
     GameStarted(){
 
-        this.readySetGoText.String = "GO!!";
+        this.readySetGoLabel.string = "GO!!";
         this.scheduleOnce(function(){
-            this.readySetGoText.active = false;
+            this.readySetGoLabel.string = "";
         }, 1);
+    },
+    EndGame( scoreVal){
+
+        this.scoreText.string = scoreVal;
+        this.endScene.active =true;
 
     },
-    EndGame(){
-        this.endScene.active =true;
-    },
     StartCongratsScene(){
+        
+        
+        
         this.congratsScene.active = true;
     },
     ReturnToMain(){
@@ -94,7 +120,6 @@ cc.Class({
         this.gameController.getComponent("GameControl").StartGame();
     },
     StartGame(){
-		window.SoundManager.playSound(SoundType.ButtonPress, false);
         this.gameController.getComponent("GameControl").StartGame();
     },
     StartGameWithDifficultyIncrease(){
@@ -102,8 +127,6 @@ cc.Class({
         this.gameController.getComponent("GameControl").StartGameEnhanceDifficulty();
     },
     
-<<<<<<< HEAD
-=======
     // Life Cycle / Physics 
     update (dt) {},
 	
@@ -121,5 +144,4 @@ cc.Class({
 		}
 	},
 	
->>>>>>> dce616f198b02e5f5f20b19bc970960b35fa5dae
 });
