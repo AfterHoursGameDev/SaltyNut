@@ -14,21 +14,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
         homeScene : {
             default : null,
             type : cc.Node
@@ -55,12 +40,12 @@ cc.Class({
         gameController:{
             default: null,
             type : cc.Node
+        },
+        readySetGoText : {
+            type: cc.Label,
+            default : null
         }
     },
-
-    
-
-    // onLoad () {},
 
     start () {
 
@@ -71,8 +56,28 @@ cc.Class({
         this.endScene.active = false;
         this.congratsScene.active = false;
         this.gameScene.active = true;
-        //this.scheduleOnce(this.StartGame(), this.gameStartTimer); 
-        this.StartGame();
+        //this.scheduleOnce(this.StartGame(), this.gameStartTimer);
+        this.readySetGoText.String = "READY!!";
+        this.readySetGoText.active = true; 
+        this.scheduleOnce(this.StartGame, this.gameStartTimer);
+    },
+    StartGameSceneEnhanceDifficulty(){
+        this.homeScene.active = false;
+        this.endScene.active = false;
+        this.congratsScene.active = false;
+        this.gameScene.active = true;
+        //this.scheduleOnce(this.StartGame(), this.gameStartTimer);
+        readySetGoText.String = "READY"
+        readySetGoText.active = true; 
+        this.scheduleOnce(this.StartGameWithDifficultyIncrease, this.gameStartTimer - 1.5);
+    },
+    GameStarted(){
+
+        this.readySetGoText.String = "GO!!";
+        this.scheduleOnce(function(){
+            this.readySetGoText.active = false;
+        }, 1);
+
     },
     EndGame(){
         this.endScene.active =true;
@@ -85,7 +90,6 @@ cc.Class({
         this.gameScene.active = false;
     },
     RestartGame(){
-        console.log("Game restarting");
         this.endScene.active =false;
         this.gameController.getComponent("GameControl").StartGame();
     },
@@ -98,8 +102,4 @@ cc.Class({
         this.gameController.getComponent("GameControl").StartGameEnhanceDifficulty();
     },
     
-
-    // Life Cycle / Physics 
-
-    update (dt) {},
 });

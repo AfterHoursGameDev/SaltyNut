@@ -90,7 +90,13 @@ cc.Class({
         },
         counter : {
             default : 0
+        },
+        // Indicator Text
+        getSetGoText : {
+            type: cc.Label,
+            default : null
         }
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -102,12 +108,13 @@ cc.Class({
     *
     */
 
-    // onLoad () {},
+    
     StartGame(){
         this.ResetValues();
         this.listOfInputs = this.BuildInputList(this.inputLength);
         this.PresentInstruction();
     },
+
     ResetValues(){
         this.currentInputIndex = 0;
         this.currentInputLimit = 2;
@@ -115,6 +122,7 @@ cc.Class({
         this.currentFlashInterval = 1.5;
         this.flashDuration = 0.5;
     },
+
     StartGameEnhanceDifficulty(){
         console.log("INCREASING DIFFICULTY");
         
