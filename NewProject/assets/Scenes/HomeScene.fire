@@ -41,9 +41,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.41300898549622506,
-      "y": 0.41300898549622506,
-      "z": 0.41300898549622506
+      "x": 0.27061198552449545,
+      "y": 0.27061198552449545,
+      "z": 0.27061198552449545
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -3268,15 +3268,15 @@
     "_useOriginalSize": false,
     "_string": "",
     "_N$string": "",
-    "_fontSize": 40,
-    "_lineHeight": 40,
+    "_fontSize": 60,
+    "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
+    "_N$fontFamily": "Impact Regular",
     "_N$overflow": 0,
     "_id": "e5ofDxd8BGQ6fatPQJbJkO"
   },
@@ -3299,15 +3299,15 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 18,
-      "g": 228,
+      "r": 0,
+      "g": 0,
       "b": 0,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 0,
-      "height": 40
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
