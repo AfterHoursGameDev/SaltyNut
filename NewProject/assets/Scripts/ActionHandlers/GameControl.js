@@ -77,7 +77,7 @@ cc.Class({
             default : 2
         },
         currentFlashInterval :{
-            default : 1.5
+            default : 1.0
         },
         flashDuration : {
             default : 0.5
@@ -123,17 +123,18 @@ cc.Class({
     },
 
     IncrementScore(){
-
         this.score += 1;
-
+        this.sceneController.getComponent("SceneManager").UpdateScoreInGame(this.score);
     },
 
     ResetValues(){
         this.currentInputIndex = 0;
         this.currentInputLimit = 2;
         this.inputLength = 5;
-        this.currentFlashInterval = 1.5;
+        this.currentFlashInterval = 1.0;
         this.flashDuration = 0.5;
+		this.score = 0;
+        this.sceneController.getComponent("SceneManager").UpdateScoreInGame(this.score);
     },
 
     StartGameEnhanceDifficulty(){
@@ -142,7 +143,11 @@ cc.Class({
         this.currentInputLimit = 2;
         this.inputLength = this.inputLength + 1;
         this.currentFlashInterval = this.currentFlashInterval - 0.1;
-        this.flashDuration = this.flashDuration - 0.05;
+		if (this.currentFlashInterval < 0.3)
+		{
+			this.currentFlashInterval = 0.3;
+		}
+        this.flashDuration = this.currentFlashInterval/2.0;
         this.listOfInputs = this.BuildInputList(this.inputLength);
 
         this.sceneController.getComponent("SceneManager").GameStarted();
@@ -151,6 +156,7 @@ cc.Class({
     },
 
     PresentInstruction(){
+        this.sceneController.getComponent("SceneManager").UpdateTurn(true);
         // Need to unschedule this from happening!!!!
         this.SetArrowAcceptInput(false);
         this.schedule(this.flashCallback,this.currentFlashInterval);
@@ -183,6 +189,11 @@ cc.Class({
                     this.PresentInstruction();
                 }
             }
+			else
+			{
+				// Entered correctly, nothing special, give timeout from start of next button
+				this.timer = 0;
+			}
         }
         else{
 			window.SoundManager.playSound(SoundType.FailedInput, false);
@@ -254,6 +265,7 @@ cc.Class({
                 this.gameRunning = true;
                 this.unschedule(this.flashCallback);
                 this.SetArrowAcceptInput(true);
+				this.sceneController.getComponent("SceneManager").UpdateTurn(false);
             }
         } 
     },

@@ -49,11 +49,24 @@ cc.Class({
         scoreText : {
             default: null,
             type: cc.Label
-        }
+        },
+        scoreTextInGame : {
+            default: null,
+            type: cc.Label
+        },
+		scoreTextColorWaiting : {
+			default: cc.Color.BLACK,
+		},
+		scoreTextColorActive : {
+			default: cc.Color.BLACK,
+		},
     },
 
     onLoad(){
-        
+        this.homeScene.active = true;
+		this.endScene.active = false;
+		this.congratsScene.active = false;
+		this.gameScene.active = false;
     },
 
     start () {
@@ -72,13 +85,17 @@ cc.Class({
         this.endScene.active = false;
         this.congratsScene.active = false;
         this.gameScene.active = true;
+		this.UpdateScoreInGame(0);
+		this.scoreTextInGame.node.active = false;
+		this.scoreTextInGame.node.color = this.scoreTextColorWaiting;
+		this.scoreTextInGame.node.opacity = this.scoreTextColorWaiting.getA();
 
         this.readySetGoLabel.string = "READY!!";
         this.readySetGoLabel.active = true; 
         this.scheduleOnce(this.StartGame, this.gameStartTimer);
     },
-    StartGameSceneEnhanceDifficulty(){
-
+    StartGameSceneEnhanceDifficulty()
+	{
 		window.SoundManager.playSound(SoundType.ButtonPress, false);
 
         this.scoreText.string = "";
@@ -87,42 +104,77 @@ cc.Class({
         this.endScene.active = false;
         this.congratsScene.active = false;
         this.gameScene.active = true;
-        
+		this.UpdateScoreInGame(0);
+		this.scoreTextInGame.node.active = false;
+		this.scoreTextInGame.node.color = this.scoreTextColorWaiting;
+		this.scoreTextInGame.node.opacity = this.scoreTextColorWaiting.getA();
+
         this.readySetGoLabel.string = "READY"
         this.readySetGoLabel.active = true; 
         this.scheduleOnce(this.StartGameWithDifficultyIncrease, this.gameStartTimer - 1.5);
     },
-    GameStarted(){
-
+    GameStarted()
+	{
+		this.scoreTextInGame.node.active = false;
         this.readySetGoLabel.string = "GO!!";
         this.scheduleOnce(function(){
             this.readySetGoLabel.string = "";
+			this.scoreTextInGame.node.active = true;
         }, 1);
+		this.scoreTextInGame.node.active = true;
     },
-    EndGame( scoreVal){
-
-        this.scoreText.string = scoreVal;
+    EndGame( scoreVal)
+	{
+		this.scoreTextInGame.node.active = false;
+        this.scoreText.string = "Score: " + scoreVal;
         this.endScene.active =true;
-
     },
+	UpdateScoreInGame(scoreVal)
+	{
+        this.scoreTextInGame.string = "Score: " + scoreVal;
+	},
+	UpdateTurn(isInstructing)
+	{
+		if (this.readySetGoLabel.string == "")
+		{
+			if (isInstructing)
+			{
+				this.scoreTextInGame.node.active = true;
+				this.scoreTextInGame.node.color = this.scoreTextColorWaiting;
+				this.scoreTextInGame.node.opacity = this.scoreTextColorWaiting.getA();
+			}
+			else
+			{
+				this.scoreTextInGame.node.active = true;
+				this.scoreTextInGame.node.color = this.scoreTextColorActive;
+				this.scoreTextInGame.node.opacity = this.scoreTextColorActive.getA();
+			}
+		}
+		else
+		{
+				this.scoreTextInGame.node.active = false;
+		}
+	},
     StartCongratsScene(){
-        
-        
-        
         this.congratsScene.active = true;
     },
     ReturnToMain(){
+		window.SoundManager.playSound(SoundType.ButtonPress, false);
         this.endScene.active = false;
         this.gameScene.active = false;
+		this.scoreTextInGame.node.active = false;
     },
     RestartGame(){
+		window.SoundManager.playSound(SoundType.ButtonPress, false);
         this.endScene.active =false;
+		this.scoreTextInGame.node.active = false;
         this.gameController.getComponent("GameControl").StartGame();
     },
     StartGame(){
         this.gameController.getComponent("GameControl").StartGame();
     },
     StartGameWithDifficultyIncrease(){
+		window.SoundManager.playSound(SoundType.ButtonPress, false);
         this.congratsScene.active = false;
         this.gameController.getComponent("GameControl").StartGameEnhanceDifficulty();
     },
