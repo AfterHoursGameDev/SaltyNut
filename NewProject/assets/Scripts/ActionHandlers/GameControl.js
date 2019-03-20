@@ -99,7 +99,31 @@ cc.Class({
         //Score
         score :{
             default : 0
-        }
+        },
+        ConfigStartSpeed :{
+            default : 1.0
+        },
+        ConfigStartFlashInterval : {
+            default : 1.0
+        },
+        ConfigIncreasePerLevel : {
+            default : 0.05
+        },
+        ConfigTopSpeed : {
+            default : 0.2
+        },
+        ConfigPercentFlashOfSpeed : {
+            default : 0.5
+        },
+        ConfigStartLength : {
+            default : 2
+        },
+        ConfigStartLevelLength : {
+            default : 5
+        },
+		ConfigDelayPresentation : {
+			default : 0.5
+		},
 
     },
 
@@ -129,10 +153,10 @@ cc.Class({
 
     ResetValues(){
         this.currentInputIndex = 0;
-        this.currentInputLimit = 2;
-        this.inputLength = 5;
-        this.currentFlashInterval = 1.0;
-        this.flashDuration = 0.5;
+        this.currentInputLimit = this.ConfigStartLength;
+        this.inputLength = this.ConfigStartLevelLength;
+        this.currentFlashInterval = this.ConfigStartSpeed;
+        this.flashDuration = this.currentFlashInterval * this.ConfigPercentFlashOfSpeed;
 		this.score = 0;
         this.sceneController.getComponent("SceneManager").UpdateScoreInGame(this.score);
     },
@@ -140,14 +164,14 @@ cc.Class({
     StartGameEnhanceDifficulty(){
         console.log("INCREASING DIFFICULTY");
         
-        this.currentInputLimit = 2;
+        this.currentInputLimit = this.ConfigStartLength;
         this.inputLength = this.inputLength + 1;
-        this.currentFlashInterval = this.currentFlashInterval - 0.1;
-		if (this.currentFlashInterval < 0.3)
+        this.currentFlashInterval = this.currentFlashInterval - this.ConfigIncreasePerLevel;
+		if (this.currentFlashInterval < this.ConfigTopSpeed)
 		{
-			this.currentFlashInterval = 0.3;
+			this.currentFlashInterval = this.ConfigTopSpeed;
 		}
-        this.flashDuration = this.currentFlashInterval/2.0;
+        this.flashDuration = this.currentFlashInterval * this.ConfigPercentFlashOfSpeed;
         this.listOfInputs = this.BuildInputList(this.inputLength);
 
         this.sceneController.getComponent("SceneManager").GameStarted();
@@ -159,7 +183,10 @@ cc.Class({
         this.sceneController.getComponent("SceneManager").UpdateTurn(true);
         // Need to unschedule this from happening!!!!
         this.SetArrowAcceptInput(false);
-        this.schedule(this.flashCallback,this.currentFlashInterval);
+		// Wait a little bit then start the pattern
+        this.scheduleOnce(function() {
+				this.schedule(this.flashCallback,this.currentFlashInterval);
+			}, this.ConfigDelayPresentation);
     },
 
     SendInput(value){
@@ -225,7 +252,15 @@ cc.Class({
     BuildInputList(numInputs){
         let tempArray = [];
         for(let i = 0; i < numInputs - 1; i++){
-            let randNum = this.GetRandomInt(2);
+            let randNum = this.GetRandomInt(8);
+			if (randNum >= 4)
+			{
+				randNum = 1;
+			}
+			else
+			{
+				randNum = 0;
+			}
             tempArray.push(randNum);    
         }
         tempArray.push(2);
