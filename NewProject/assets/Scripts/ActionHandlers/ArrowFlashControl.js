@@ -46,6 +46,14 @@ cc.Class({
             default : null,
             type : cc.Node
         },
+        glowingSpot :{
+            default : null,
+            type : cc.Node
+        },
+        dullSpot :{
+            default : null,
+            type : cc.Node
+        },
         UpDownValue:{
             default : 0
         }
@@ -66,9 +74,13 @@ cc.Class({
     
     FlashCan(duration){
         this.CanNode.angle = -15;
+		this.dullSpot.active = false;
+		this.glowingSpot.active = true;
         
         this.scheduleOnce(function(){
             this.CanNode.angle = 0;
+			this.dullSpot.active = true;
+			this.glowingSpot.active = false;
         }, duration);
     },
     
