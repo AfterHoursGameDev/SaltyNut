@@ -31,6 +31,10 @@ cc.Class({
             type :cc.Node
         }
         ,
+        creditsScene : {
+            default : null,
+            type : cc.Node
+        },
         gameRunning : {
             default : false
         },
@@ -67,6 +71,7 @@ cc.Class({
 		this.endScene.active = false;
 		this.congratsScene.active = false;
 		this.gameScene.active = false;
+		this.creditsScene.active = false;
     },
 
     start () {
@@ -85,6 +90,7 @@ cc.Class({
         this.endScene.active = false;
         this.congratsScene.active = false;
         this.gameScene.active = true;
+		this.creditsScene.active = false;
 		this.UpdateScoreInGame(0);
 		this.scoreTextInGame.node.active = false;
 		this.scoreTextInGame.node.color = this.scoreTextColorWaiting;
@@ -181,6 +187,18 @@ cc.Class({
     
     // Life Cycle / Physics 
     update (dt) {},
+
+	CreditsOpenPressed()
+	{
+		this.homeScene.active = false;
+		this.creditsScene.active = true;
+	},
+	
+	CreditsClosePressed()
+	{
+		this.creditsScene.active = false;
+		this.homeScene.active = true;
+	},
 	
 	InvitePressed()
 	{
